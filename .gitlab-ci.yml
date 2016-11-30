@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build_and_deploy_prod:
+  stage: build
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=get-uber-raml --api-key=$HEROKU_API_KEY --strategy=git
+  only:
+    - master
+
