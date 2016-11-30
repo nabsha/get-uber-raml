@@ -11,6 +11,8 @@ var rmdir = require('rmdir');
 
 app.use('/form', express.static(__dirname + '/upload.test.html'));
 
+app.set('port', (process.env.PORT || 5000));
+
 // default options
 app.use(fileUpload());
 
@@ -71,6 +73,6 @@ app.post('/upload', function(req, res) {
 
 app.use(express.static('./public')); 		// set the static files location /public/img will be /img for users
 
-app.listen(80, function() {
-    console.log('Express server listening on port 80/8080');
+app.listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
 })
