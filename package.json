@@ -1,5 +1,5 @@
 {
-  "name": "node-raml-aggregator",
+  "name": "get-uber-raml",
   "version": "0.0.1",
   "description": "Creates uber raml by including all resources in one place",
   "main": "server.js",
