@@ -1,11 +1,10 @@
-
 var express = require('express');
 var fileUpload = require('express-fileupload');
 var fs = require('fs');
 var unzip = require('unzip');
 var glob = require('glob');
 
-var raml = require('raml-parser');
+var raml1 = require('raml-1-parser');
 var toRAML = require('raml-object-to-raml');
 var rmdir = require('rmdir');
 
@@ -21,8 +20,8 @@ app.get('/ping', function (req, res) {
 });
 
 function uberGenerator(file, res, uploadPath, unzipDirectory) {
-    raml.loadFile(file).then(function (data) {
-        res.contentType('application/json').send(toRAML(data))
+      raml1.loadApi(file).then(function (data) {
+        res.contentType('application/json').send(toRAML(data.toJSON()))
         fs.unlink(uploadPath, function (err) {
             if (err) throw err;
             console.log('successfully deleted ' + uploadPath);
