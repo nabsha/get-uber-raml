@@ -37,13 +37,10 @@ function uberGenerator(file, res, uploadPath, unzipDirectory) {
 
 function successfulUnzip(unzipDirectory, res, uploadPath) {
     console.log("Extraction complete " + unzipDirectory)
-    glob(unzipDirectory + "/*.raml", function (err, files) {
+    glob(unzipDirectory + "/**/*.raml", function (err, files) {
         console.log(files)
         if (!err) {
-            files.forEach(function (file) {
-                    uberGenerator(file, res, uploadPath, unzipDirectory);
-                }
-            )
+            uberGenerator(files[0], res, uploadPath, unzipDirectory);
         } else {
             res.status(400).send("No raml file found in the zipped file" + err)
         }
